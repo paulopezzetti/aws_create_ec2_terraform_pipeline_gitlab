@@ -29,7 +29,9 @@ terraform_plan:
   artifacts:
     paths:
       - "$CI_PROJECT_DIR/tfvars/tfplan"  
-  when: always    
+  when: always
+  tags:
+    - lab
 
 terraform_apply:
   stage: apply
@@ -41,6 +43,8 @@ terraform_apply:
   dependencies:
     - terraform_plan
   when: manual
+  tags:
+    - lab
 
 terraform_destroy:
   stage: destroy
@@ -50,3 +54,5 @@ terraform_destroy:
     - terraform init -input=false
     - terraform destroy -input=false -auto-approve
   when: manual
+  tags:
+    - lab
